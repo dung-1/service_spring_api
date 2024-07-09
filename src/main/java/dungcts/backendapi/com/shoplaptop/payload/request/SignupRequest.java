@@ -1,7 +1,7 @@
 package dungcts.backendapi.com.shoplaptop.payload.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class SignupRequest {
     @NotBlank

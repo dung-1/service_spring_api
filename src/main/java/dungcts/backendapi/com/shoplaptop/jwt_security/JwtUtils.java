@@ -21,6 +21,11 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+    // @Value("${brycen.ihpaApp.jwtSecret}")
+    // private String jwtSecret;
+
+    // @Value("${brycen.ihpaApp.jwtExpirationMs}")
+    // private int jwtExpirationM
     private static final Dotenv dotenv = Dotenv.configure().load();
 
     // lấy tên bảo mật và thời gian giới hạn của token

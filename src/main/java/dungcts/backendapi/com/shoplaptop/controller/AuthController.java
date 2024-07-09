@@ -1,5 +1,7 @@
 package dungcts.backendapi.com.shoplaptop.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +24,9 @@ import dungcts.backendapi.com.shoplaptop.payload.response.JwtResponse;
 import dungcts.backendapi.com.shoplaptop.responsitory.UserRepository;
 import dungcts.backendapi.com.shoplaptop.service.UserDetailsImpl;
 import dungcts.backendapi.com.shoplaptop.service.UserDetailsServiceImpl;
-import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
     private final UserDetailsServiceImpl userService;
 

@@ -7,6 +7,9 @@ public class JwtResponse {
     private String username;
     private String roles;
 
+    public JwtResponse() {
+    }
+
     public JwtResponse(String accessToken, Long id, String username, String roles) {
         this.token = accessToken;
         this.id = id;

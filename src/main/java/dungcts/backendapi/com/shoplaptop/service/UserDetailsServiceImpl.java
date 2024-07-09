@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dungcts.backendapi.com.shoplaptop.entity.UserAccount;
 import dungcts.backendapi.com.shoplaptop.responsitory.UserRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
