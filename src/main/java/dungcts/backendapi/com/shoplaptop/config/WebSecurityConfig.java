@@ -58,6 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(auth -> auth.antMatchers("/auth/**").permitAll()
+                        .antMatchers("/product/**").permitAll()
+                        .antMatchers("/categories/**").permitAll()
                         // checklist(7)
                         // hasRole("ADMIN")
 
