@@ -2,6 +2,8 @@ package dungcts.backendapi.com.shoplaptop.service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,5 +78,28 @@ public class ProductService {
             throw new ResourceNotFoundException("Product not found");
         }
         productRepository.deleteById(productId);
+    }
+
+    public List<ProductDTO> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for (Product product : products) {
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setProductId(product.getProductId());
+            productDTO.setName(product.getName());
+            productDTO.setDescription(product.getDescription());
+            productDTO.setPrice(product.getPrice());
+            productDTO.setStockQuantity(product.getStockQuantity());
+            productDTO.setImageUrlPath(product.getImageUrl());
+            productDTO.setCategoryId(product.getCategory().getCategoryId());
+            productDTO.setStatus(product.getStatus());
+            if (product.getCreatedBy() != null) {
+                productDTO.setCreatedBy(product.getCreatedBy().getUserId());
+            }
+            productDTO.setCreatedAt(product.getCreatedAt());
+            productDTO.setUpdatedAt(product.getUpdatedAt());
+            productDTOs.add(productDTO);
+        }
+        return productDTOs;
     }
 }
