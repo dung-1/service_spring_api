@@ -46,7 +46,7 @@ public class ProductController {
         return new ResponseEntity<>(fileName, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<ProductDTO> addProduct(@ModelAttribute ProductDTO productDTO) throws IOException {
         productDTO.setCreatedAt(LocalDateTime.now());
         return new ResponseEntity<>(productService.addProduct(productDTO), HttpStatus.CREATED);

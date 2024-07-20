@@ -60,6 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests(auth -> auth.antMatchers("/auth/**").permitAll()
                         .antMatchers("/product/**").permitAll()
                         .antMatchers("/categories/**").permitAll()
+                        .antMatchers("/uploads/**").permitAll()
+
                         // checklist(7)
                         // hasRole("ADMIN")
 
