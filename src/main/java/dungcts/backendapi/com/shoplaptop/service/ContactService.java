@@ -2,6 +2,7 @@ package dungcts.backendapi.com.shoplaptop.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,14 @@ public class ContactService {
         } else {
             throw new RuntimeException("Contact not found with id: " + categoryId);
         }
+    }
+
+    public List<ContactDTO> getAllContacts() {
+        List<Contact> contacts = contactRepository.findAll();
+        return contacts.stream()
+                .map(contact -> new ContactDTO(contact.getCategoryId(), contact.getName(), contact.getEmail(),
+                        contact.getPhone(), contact.getTitle(), contact.getContent()))
+                .collect(Collectors.toList());
     }
 
     @Transactional

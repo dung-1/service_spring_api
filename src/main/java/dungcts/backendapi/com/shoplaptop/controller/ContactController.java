@@ -41,6 +41,12 @@ public class ContactController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<List<ContactDTO>> getAllContacts() {
+        List<ContactDTO> contacts = contactService.getAllContacts();
+        return new ResponseEntity<>(contacts, HttpStatus.OK);
+    }
+
     @PutMapping("/{categoryId}")
     public ResponseEntity<ContactDTO> updateContact(@PathVariable Long categoryId, @RequestBody ContactDTO contactDTO) {
         try {
