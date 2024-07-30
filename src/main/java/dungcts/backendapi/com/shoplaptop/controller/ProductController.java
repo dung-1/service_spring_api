@@ -1,7 +1,7 @@
 package dungcts.backendapi.com.shoplaptop.controller;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,6 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDTO> addProduct(@ModelAttribute ProductDTO productDTO) throws IOException {
-        productDTO.setCreatedAt(LocalDateTime.now());
         return new ResponseEntity<>(productService.addProduct(productDTO), HttpStatus.CREATED);
     }
 

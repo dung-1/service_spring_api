@@ -19,7 +19,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
-    private int stockQuantity;
+    private Integer stockQuantity;
 
     @Transient
     private MultipartFile imageUrl; // Sử dụng Transient để JPA không ánh xạ thuộc tính này
