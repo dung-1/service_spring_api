@@ -25,7 +25,8 @@ public class ProductDTO {
     private MultipartFile imageUrl; // Sử dụng Transient để JPA không ánh xạ thuộc tính này
 
     private String imageUrlPath; // Đường dẫn của file ảnh trong database
-    private Long categoryId;
+    private Long categoryId; // ID của danh mục (cần để tạo mới sản phẩm)
+    private String categoryName; // Tên danh mục
     private String status;
     private Long createdBy;
     private LocalDateTime createdAt;
@@ -35,7 +36,8 @@ public class ProductDTO {
     }
 
     public ProductDTO(Long productId, String name, String description, BigDecimal price, int stockQuantity,
-            String imageUrlPath, Long categoryId, String status, Long createdBy, LocalDateTime createdAt,
+            String imageUrlPath, String categoryName, Long categoryId, String status, Long createdBy,
+            LocalDateTime createdAt,
             LocalDateTime updatedAt) {
         this.productId = productId;
         this.name = name;
@@ -43,10 +45,30 @@ public class ProductDTO {
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.imageUrlPath = imageUrlPath;
+        this.categoryName = categoryName;
         this.categoryId = categoryId;
         this.status = status;
         this.createdBy = createdBy;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public ProductDTO(Long productId, String name, String description, BigDecimal price, int stockQuantity,
+            String imageUrlPath, String categoryName, String status, Long createdBy,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt) {
+        this.productId = productId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.imageUrlPath = imageUrlPath;
+        this.categoryName = categoryName;
+        this.status = status;
+        this.createdBy = createdBy;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    // Getters and setters
 }

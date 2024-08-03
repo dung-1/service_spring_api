@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class ProductService {
         }
 
         product = productRepository.save(product);
-        return productRepository.findProductDTOById(product.getProductId());
+        return toDTO(product);
     }
 
     public ProductDTO updateProduct(Long productId, ProductDTO productDTO) throws IOException {
@@ -70,7 +71,7 @@ public class ProductService {
         }
 
         product = productRepository.save(product);
-        return productRepository.findProductDTOById(product.getProductId());
+        return toDTO(product);
     }
 
     public void deleteProduct(Long productId) {
@@ -82,24 +83,27 @@ public class ProductService {
 
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findAll();
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        for (Product product : products) {
-            ProductDTO productDTO = new ProductDTO();
-            productDTO.setProductId(product.getProductId());
-            productDTO.setName(product.getName());
-            productDTO.setDescription(product.getDescription());
-            productDTO.setPrice(product.getPrice());
-            productDTO.setStockQuantity(product.getStockQuantity());
-            productDTO.setImageUrlPath(product.getImageUrl());
-            productDTO.setCategoryId(product.getCategory().getCategoryId());
-            productDTO.setStatus(product.getStatus());
-            if (product.getCreatedBy() != null) {
-                productDTO.setCreatedBy(product.getCreatedBy().getUserId());
-            }
-            productDTO.setCreatedAt(product.getCreatedAt());
-            productDTO.setUpdatedAt(product.getUpdatedAt());
-            productDTOs.add(productDTO);
-        }
+        List<ProductDTO> productDTOs = products.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
         return productDTOs;
+    }
+
+    private ProductDTO toDTO(Product product) {
+        String categoryName = (product.getCategory() != null) ? product.getCategory().getName() : "";
+        Long categoryId = (product.getCategory() != null) ? product.getCategory().getCategoryId() : null;
+        return new ProductDTO(
+                product.getProductId(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
+                product.getStockQuantity(),
+                product.getImageUrl(),
+                categoryName,
+                categoryId,
+                product.getStatus(),
+                (product.getCreatedBy() != null) ? product.getCreatedBy().getUserId() : null,
+                product.getCreatedAt(),
+                product.getUpdatedAt());
     }
 }
