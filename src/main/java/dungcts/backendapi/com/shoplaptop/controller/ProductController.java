@@ -67,13 +67,19 @@ public class ProductController {
         }
     }
 
-    // @PutMapping("/update/{id}")
-    // public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id,
-    // @ModelAttribute ProductDTO productDTO)
-    // throws IOException {
-    // return new ResponseEntity<>(productService.updateProduct(id, productDTO),
-    // HttpStatus.OK);
-    // }
+    @PutMapping(value = "/update/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
+            MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<ProductDTO> updateProduct(
+            @PathVariable Long id,
+            @RequestPart("product") ProductDTO productDTO,
+            @RequestPart(value = "file", required = false) MultipartFile file) {
+        try {
+            ProductDTO updatedProduct = productService.updateProduct(id, productDTO, file);
+            return ResponseEntity.ok(updatedProduct);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {

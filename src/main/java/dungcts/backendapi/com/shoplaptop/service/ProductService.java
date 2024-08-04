@@ -57,6 +57,7 @@ public class ProductService {
     public ProductDTO updateProduct(Long productId, ProductDTO productDTO, MultipartFile file) throws IOException {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
@@ -69,6 +70,9 @@ public class ProductService {
         if (file != null && !file.isEmpty()) {
             String imageUrl = fileStorageService.storeFile(file);
             product.setImageUrl(imageUrl);
+        } else if (productDTO.getImageUrlPath() != null && !productDTO.getImageUrlPath().isEmpty()) {
+            // Giữ nguyên URL hình ảnh hiện tại nếu không có file mới được tải lên
+            product.setImageUrl(productDTO.getImageUrlPath());
         }
 
         product = productRepository.save(product);
