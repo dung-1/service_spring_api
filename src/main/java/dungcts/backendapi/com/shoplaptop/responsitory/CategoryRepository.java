@@ -1,5 +1,7 @@
 package dungcts.backendapi.com.shoplaptop.responsitory;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +13,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query("SELECT new dungcts.backendapi.com.shoplaptop.dto.CategoryDTO(c.categoryId, c.name, c.description, c.parent.categoryId) FROM Category c WHERE c.categoryId = :categoryId")
     CategoryDTO findCategoryDTOById(@Param("categoryId") Long categoryId);
 
-    // Optional<Category> findById(Long id);
+    Optional<Category> findById(Long id);
 
 }
