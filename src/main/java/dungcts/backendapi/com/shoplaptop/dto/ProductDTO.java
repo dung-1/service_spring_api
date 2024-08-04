@@ -56,7 +56,6 @@ public class ProductDTO implements Serializable {
         this.stockQuantity = stockQuantity;
         this.imageUrlPath = imageUrlPath;
         this.categoryId = categoryId;
-        this.status = status;
         this.createdBy = createdBy;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
